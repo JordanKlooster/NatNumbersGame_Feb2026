@@ -1,0 +1,10 @@
+name = "NatNumbersGame_Feb2026"
+version = "0.1.0"
+defaultTargets = ["natnumbersgame_feb2026"]
+
+[[lean_lib]]
+name = "NatNumbersGameFeb2026"
+
+[[lean_exe]]
+name = "natnumbersgame_feb2026"
+root = "Main"
