@@ -1,7 +1,16 @@
--- import Mathlib.lemma
--- import lemma.olean -- local file?
--- import MyNat.lemma
 import NatNumbersGameFeb2026.MyNat
+import NatNumbersGameFeb2026.Lemma
+import NatNumbersGameFeb2026.NthRewrite
+
+
+-- for these ones I downloaded the files from the mathlib github and put them in the folder
+-- lets you write "lemma" instead of "theorem"
+-- https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/Tactic/Lemma.lean
+-- https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/Tactic/NthRewrite.lean
+
+
+
+-- import Mathlib.Tactic.nth_rw
 
 /- For all natural numbers x, y, z, we have
 x * y + z = x * y + z
@@ -115,3 +124,47 @@ example (a b c : MyNat) : a + (b + 0) + (c + 0) = a + b + c := by
   rewrite [add_zero]
   rewrite [add_zero]
   rfl
+example (a b c : MyNat) : a + (b + 0) + (c + 0) = a + b + c := by
+    repeat rw[add_zero] -- repeat makes it do thing multiple times
+  -- rw[add_zero]
+  -- rfl
+
+-- example tut6_8 -- change the +0 with c first
+example (a b c : MyNat) : a + (b + 0) + (c + 0) = a + b + c := by
+rw [add_zero c]
+rw [add_zero]
+
+
+-- another way to show the first part
+example (a b c : MyNat) : a + (b + 0) + (c + 0) = a + (b + 0) + c := by
+rw [add_zero c]
+
+--add_zero c is a proof of c + 0 = c so that was what got rewritten. You can
+--now change b + 0 to b with rw [add_zero] or rw [add_zero b].
+--You can usually stick to rw [add_zero] unless you need real precision.
+
+
+-- add_succ is now allowed    a + MyNat.succ d = MyNat.succ (a + d)
+
+-- example tut7_8
+theorem succ_eq_add_one (n : MyNat)  : succ n = n + 1 := by
+  rw [one_eq_succ_zero]
+  rw [add_succ]
+  rw [add_zero]
+
+lemma succ_eq_add_one2 (n : MyNat)  : succ n = n + 1 := by
+  rw [one_eq_succ_zero]
+  rw [add_succ]
+  rw [add_zero]
+
+
+
+--example tut7_8 -- change the +0 with c first
+example : (2 : MyNat) + 2 = 4 := by
+  nth_rewrite 2 [two_eq_succ_one]
+  nth_rewrite 1 [one_eq_succ_zero]
+  nth_rw 1 [add_succ]
+  nth_rw 1 [add_succ]
+  rw [add_zero]
+  rw [<- three_eq_succ_two]
+  rw [<- four_eq_succ_three]
