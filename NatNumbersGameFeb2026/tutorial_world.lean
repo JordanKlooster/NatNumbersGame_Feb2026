@@ -159,7 +159,7 @@ lemma succ_eq_add_one2 (n : MyNat)  : succ n = n + 1 := by
 
 
 
---example tut7_8 -- change the +0 with c first
+--example tut8_8 -- change the +0 with c first
 example : (2 : MyNat) + 2 = 4 := by
   nth_rewrite 2 [two_eq_succ_one]
   nth_rewrite 1 [one_eq_succ_zero]
@@ -168,3 +168,11 @@ example : (2 : MyNat) + 2 = 4 := by
   rw [add_zero]
   rw [<- three_eq_succ_two]
   rw [<- four_eq_succ_three]
+
+example : (2 : MyNat) + 2 = 4 := by
+  nth_rewrite 2 [two_eq_succ_one] -- only change the second `2` to `succ 1`.
+  rw [add_succ]
+  rw [one_eq_succ_zero]
+  rw [add_succ, add_zero] -- two rewrites at once
+  rw [← three_eq_succ_two] -- change `succ 2` to `3`
+  rw [← four_eq_succ_three]
