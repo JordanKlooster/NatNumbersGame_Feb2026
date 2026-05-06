@@ -40,7 +40,7 @@ example (x y : MyNat) (h: y = x + 7): 2 * y = 2 * (x + 7) := by
 -- example 3        https://youtu.be/bo95_OtujxY?list=PLCaPonEDDnrkDQVfxWiYdF0tYOYRyLI3N&t=562
 -- theorem add_zero (a : MyNat): a + 0 = a := by
 -- sorry
-theorem add_zero (a : MyNat): a + 0 = a := by
+theorem add_zero (a : MyNat): a + zero = a := by
 rfl
 
 
